@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Criptografia</title>
+
+<script>
+async function reqRest(event) {
+	event.preventDefault();
+	
+	let palavra = document.getElementById('palavra').value; 
+	let url = 'http://localhost:8080/prjCriptografar/ws/md5/' + palavra;
+	
+	let response = await fetch(url, { method: 'GET' });
+	let resultadoCriptografia = await response.text();
+	document.getElementById('resultado').value = resultadoCriptografia;	
+}
+</script>
+
+</head>
+<body>
+	<h1>Gerar MD5</h1>
+	<form onsubmit="reqRest(event)"> 
+		<input type="text" id="palavra" placeholder="Digite o que quer criptografar"/><br/>
+		<button type="submit">Criptografar</button><br/><br/>
+		<input type="text" id="resultado" placeholder="Resultado"/><br/>
+	</form>
+</body>
+</html>
